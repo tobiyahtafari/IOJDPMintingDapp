@@ -24,9 +24,10 @@ import { Skeleton } from "./ui/skeleton";
 import { createThirdwebClient } from "thirdweb";
 import { darkTheme } from "thirdweb/react";
 import {
-	inAppWallet,
-	createWallet,
-  } from "thirdweb/wallets";
+  inAppWallet,
+  createWallet,
+} from "thirdweb/wallets";
+import { bsc } from "thirdweb/chains"; // Import BSC chain
 
 type Props = {
   contract: ThirdwebContract;
@@ -64,8 +65,6 @@ export function NftMint(props: Props) {
     }
   };
 
-
-
   if (props.pricePerToken === null || props.pricePerToken === undefined) {
     console.error("Invalid pricePerToken");
     return null;
@@ -85,15 +84,16 @@ export function NftMint(props: Props) {
 
       {/* Minting Table with Transparent Background */}
       <Card className="w-full max-w-md relative z-10 bg-white bg-opacity-70 shadow-md">
-	  <br />
-	  <div className="button-wrapper">
-  <ConnectButton
-    client={client}
-    connectButton={{
-      className: "connect-button2",  // Apply the class for styling
-    }}
-  />
-</div>
+        <br />
+        <div className="button-wrapper">
+          <ConnectButton
+            client={client}
+            chain={bsc}  // Use BSC as the specified chain
+            connectButton={{
+              className: "connect-button2",  // Apply the class for styling
+            }}
+          />
+        </div>
         <CardContent className="pt-6">
           <div className="aspect-square overflow-hidden rounded-lg mb-4 relative">
             {props.isERC1155 ? (
@@ -122,12 +122,12 @@ export function NftMint(props: Props) {
           <p className="text-gray-600 dark:text-gray-300 mb-4">
             {props.description}
           </p>
-		  <p className="text-xs text-gray-600 dark:text-gray-300 mb-4">
-  Only 10,000,000 Digital Passports. <br />
-  Stake and Earn WAGA Daily Starting: 03/03/2025. <br />
-  Receive BIG Random Raffle Rewards! <br />
-  Isle of Judah Info Early Access.
-</p>
+          <p className="text-xs text-gray-600 dark:text-gray-300 mb-4">
+            Only 10,000,000 Digital Passports. <br />
+            Stake and Earn WAGA Daily Starting: 03/03/2025. <br />
+            Receive BIG Random Raffle Rewards! <br />
+            Isle of Judah Info Early Access.
+          </p>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center">
               <Button
@@ -195,7 +195,7 @@ export function NftMint(props: Props) {
             <ClaimButton
               theme={"light"}
               contractAddress={props.contract.address}
-              chain={props.contract.chain}
+              chain={bsc}  // Use BSC as the specified chain
               client={props.contract.client}
               claimParams={
                 props.isERC1155
@@ -236,28 +236,21 @@ export function NftMint(props: Props) {
             </ClaimButton>
           ) : (
             <ConnectButton
-  client={client}
-  connectButton={{
-    className: "connect-button",  // Apply the class for styling
-    style: {
-      width: "100%",  // This keeps it at 100% width inline
-    },
-  }}
-/>
+              client={client}
+              chain={bsc}  // Use BSC as the specified chain
+              connectButton={{
+                className: "connect-button",  // Apply the class for styling
+                style: {
+                  width: "100%",  // This keeps it at 100% width inline
+                },
+              }}
+            />
           )}
         </CardFooter>
-		<div className="flex items-center justify-center h-full">
-  <img src="recommendokx.png" alt="Recommend OKX" className="w-auto h-auto -mt-2" />
-</div><br />
+        <div className="flex items-center justify-center h-full">
+          <img src="recommendokx.png" alt="Recommend OKX" className="w-auto h-auto -mt-2" />
+        </div>
       </Card>
-
-      {true && (
-        <Toast className="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-md">
-          Successfully minted {quantity} Digital Passport(s)
-          {quantity > 1 ? "s" : ""}
-          {useCustomAddress && customAddress ? ` to ${customAddress}` : ""}!
-        </Toast>
-      )}
     </div>
   );
 }
