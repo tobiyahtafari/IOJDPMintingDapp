@@ -64,28 +64,6 @@ export function NftMint(props: Props) {
     }
   };
 
-  const client = createThirdwebClient({
-	clientId: "....",
-  });
-  
-  const wallets = [
-	inAppWallet({
-	  auth: {
-		options: [
-		  "google",
-		  "email",
-		  "passkey",
-		  "phone",
-		  "facebook",
-		  "apple",
-		],
-	  },
-	}),
-	createWallet("io.metamask"),
-	createWallet("com.coinbase.wallet"),
-	createWallet("com.okex.wallet"),
-  ];
-
 
 
   if (props.pricePerToken === null || props.pricePerToken === undefined) {
@@ -109,26 +87,12 @@ export function NftMint(props: Props) {
       <Card className="w-full max-w-md relative z-10 bg-white bg-opacity-70 shadow-md">
 	  <br />
 	  <div className="button-wrapper">
-	  <ConnectButton
-  client={client}
-  wallets={wallets}
-  theme={darkTheme({
-    colors: {
-		modalBg: "hsl(125, 100%, 3%)",
-		accentText: "hsl(126, 100%, 60%)",
-		accentButtonBg: "hsl(216, 100%, 50%)",
-	  },
-	})}
-	connectModal={{
-	  size: "compact",
-	  title: "WAGA SMART WALLET",
-	  titleIcon:
-		"https://photos.pinksale.finance/file/pinksale-logo-upload/1731630259876-25b23eb9ce528cb21bd8463d10f59fcc.png",
-	}}
-  connectButton={{
-    className: "connect-button2",  // Add the class name here
-  }}
-/>
+  <ConnectButton
+    client={client}
+    connectButton={{
+      className: "connect-button2",  // Apply the class for styling
+    }}
+  />
 </div>
         <CardContent className="pt-6">
           <div className="aspect-square overflow-hidden rounded-lg mb-4 relative">
@@ -273,22 +237,11 @@ export function NftMint(props: Props) {
           ) : (
             <ConnectButton
   client={client}
-  wallets={wallets}
-  theme={darkTheme({
-    colors: {
-		modalBg: "hsl(125, 100%, 3%)",
-		accentText: "hsl(126, 100%, 60%)",
-		accentButtonBg: "hsl(216, 100%, 50%)",
-	  },
-	})}
-	connectModal={{
-	  size: "compact",
-	  title: "WAGA SMART WALLET",
-	  titleIcon:
-		"https://photos.pinksale.finance/file/pinksale-logo-upload/1731630259876-25b23eb9ce528cb21bd8463d10f59fcc.png",
-	}}
   connectButton={{
-    className: "connect-button",  // Add the class name here
+    className: "connect-button",  // Apply the class for styling
+    style: {
+      width: "100%",  // This keeps it at 100% width inline
+    },
   }}
 />
           )}
