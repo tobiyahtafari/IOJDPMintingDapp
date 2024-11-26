@@ -203,9 +203,28 @@
   transform: translateX(-50%);
 }
 
+.button-wrapper {
+  display: flex;                  /* Use Flexbox to center content */
+  justify-content: center;        /* Center horizontally */
+  align-items: center;            /* Center vertically */
+}
+
 /* Style for ConnectButton */
 .connect-button {
   width: 100% !important;  /* Ensures 100% width */
+  background-color: #000 !important;  /* Black background */
+  color: #fff !important;             /* White text */
+  border: 2px solid transparent !important; /* Transparent border */
+  padding: 10px 20px !important;      /* Padding */
+  font-size: 16px !important;         /* Font size */
+  position: relative !important;      /* For any positioning or stacking context */
+  z-index: 1 !important;              /* To ensure button stays on top */
+  transition: all 0.3s ease !important;  /* Smooth transition for hover */
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.5) !important;  /* Green glow effect */
+}
+
+.connect-button2 {
+  width: 44% !important;  /* Ensures 100% width */
   background-color: #000 !important;  /* Black background */
   color: #fff !important;             /* White text */
   border: 2px solid transparent !important; /* Transparent border */
@@ -221,5 +240,6 @@
 .connect-button:hover {
   color: rgb(32, 240, 32) !important;  /* Green text on hover */
 }
+
 
 
